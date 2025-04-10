@@ -1,14 +1,18 @@
-
 from flask import Flask, request
-import json
 
 app = Flask(__name__)
 
+# Endpoint buat nerima sinyal dari TradingView
 @app.route('/', methods=['POST'])
 def webhook():
     data = request.json
-    print("Received data:", data)
-    return {'status': 'success'}, 200
+    print("📩 Webhook received:", data)
+    return '✅ Webhook received', 200
+
+# Endpoint buat test di browser
+@app.route('/', methods=['GET'])
+def index():
+    return "🚀 Webhook bot is live!", 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(debug=False, host='0.0.0.0', port=8080)
